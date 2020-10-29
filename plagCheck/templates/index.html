@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Plagiarism-Checker</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <hgroup>
+    <h2>PLAGIARISM CHECKER</h2>
+    </hgroup>
+  <div class="login" id="logbox">
+    <form action="{{ url_for('cosineSimilarity')}}" name="inputform" method="post" id="checkform" enctype="multipart/form-data">
+    <div class="group">
+      <textarea form ="checkform" id="orgtext"  autofocus name="orgtext" cols="100" rows="7" wrap="soft"></textarea>
+      <span class="bar"></span>
+      <label id="orgtextlabel">Original Text (Optional)</label>
+    </div>
+    <div class="group">
+       <textarea form ="checkform" id="plagtext"   autofocus name="plagtext" cols="100" rows="7" wrap="soft" required></textarea>
+       <span class="bar"></span>
+      <label id="plagtextlabel">Plagiarised Text *</label>
+    </div>
+    <br>
+    <div class="group" id="result">
+     {{ plag_meter }}
+    </div>
+    <br>
+    <button type="submit" id="submitbutton" class="button buttonBlue">CHECK
+      <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+    </button>
+    <a href="{{ url_for('home') }}" class="button buttonBlue">
+      <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+      Return to Home Page
+    </a>
+
+    </form>
+ </div>
+    <br>
+
+
+    <script>
+        function ganttEach() {
+      $(document).ready(function(){
+        if($('#orgtext').val()){
+      $('#orgtextlabel').css('top', '-20px');
+      $('#orgtextlabel').css('left', '-2px');
+      $('#orgtextlabel').css('transform', 'scale(.75)');
+      $('#orgtextlabel').css('color', '#4a89dc');
+     }
+     if($('#plagtext').val()){
+      $('#plagtextlabel').css('top', '-20px');
+      $('#plagtextlabel').css('left', '-2px');
+      $('#plagtextlabel').css('transform', 'scale(.75)');
+      $('#plagtextlabel').css('color', '#4a89dc');
+     }
+        });
+    }window.setInterval(ganttEach, 100);
+
+
+    </script>
+</body>
+</html>
+
