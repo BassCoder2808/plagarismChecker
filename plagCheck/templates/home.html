@@ -1,5 +1,71 @@
 {% extends 'layout.html' %}
+{% block style %}
+    <style>
+
+      h2 {
+        text-align: center;
+      }
+
+      p {
+        text-align: center;
+      }
+
+      .my-class {
+
+        padding: 80px 01px 5px 80px;
+
+      }
+
+
+      .block {
+        display: block;
+        width: 100%;
+        border: none;
+        background-color: #3166e2;
+        color: white;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .block:hover {
+        background-color: #ddd;
+        color: black;
+      }
+  </style>
+{% endblock style %}
 {% block content %}
-  <h1>Welcome to our home page !!!!</h1>
-  <a href="{{ url_for('checkPlagarism') }}" class="btn btn-outline-dark">Check Plagarism</a>
+  <h2 text-align:right>Welcome to PlagCheck !!!!</h2>
+  <p></p>
+  <p></p>
+  <h2>A website which is used to detect Plagiarised content</h2>
+  <p></p>
+  <p></p>
+  {% if current_user.is_authenticated %}
+    <h2>Welcome {{ current_user.name }}</h2>
+    <p></p>
+    <p></p>
+    <p>Want to check your content ?</p>
+    <p></p>
+    <p></p>
+  {% else %}
+    <h2>Can you please login first ?</h2>
+  {% endif %}
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <div class="my-class"><a href="{{ url_for('checkPlagarism') }}">
+      <button class="block">Check Plagiarism of your text</button>
+    </a></div>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <footer>
+    <p>© 2020 Rishabh Jain  Vedant Jolly Sakshi Mahadik</p>
+  </footer>
 {% endblock content %}

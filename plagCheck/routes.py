@@ -43,7 +43,10 @@ def login():
             login_user(user,remember=form.remember.data)
             next_page = request.args.get('next')
             if next_page:
-                return redirect(url_for(next_page))
+                print(next_page)
+                list1 = next_page.split("/")
+                print(list1)
+                return redirect(url_for(list1[1]))
             flash("You have been logged in successfully",'success')
             return redirect(url_for('home'))
         else:
@@ -95,7 +98,7 @@ def send_reset_email(user):
     msg.body = f'''
         To reset your password visit the following link.
         {url_for('reset_token',token=token,_external=True)}
-        If you did not make the chnage request please ignore it.
+        If you did not make the change request please ignore it.
         Nothing will be changed!!!
     '''
     mail.send(msg)
@@ -183,7 +186,7 @@ def cosineSimilarity():
 
 
     # Here we are checking if the user has provided an optional input or not
-    database=request.form.get('orgtext')
+    database = request.form.get('orgtext')
     if(not database):
             keyword = inputQuery
             print(keyword)
@@ -203,8 +206,11 @@ def cosineSimilarity():
             print(text)
 
             # cleaning our text
+            # break into lines and remove leading and trailing space on each
             lines = (line.strip() for line in text.splitlines())
+            # break multi-headlines into a line each
             chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+            # drop blank lines
             database = '\n'.join(chunk for chunk in chunks if chunk)
 
 
